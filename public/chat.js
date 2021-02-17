@@ -33,3 +33,13 @@ document.querySelector('#chat-form').addEventListener('submit', event => {
     event.preventDefault();
     addChatMessage();
 });
+
+window.addEventListener('load', () => {
+    const socket = io();
+    socket.on('connect', () => {
+        socket.emit('join', {id: '456'});
+    });
+    socket.on('refresh', () => {
+        fetchChatMessages();
+    });
+});
